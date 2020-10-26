@@ -1,3 +1,7 @@
+# Custom
+build/**
+
+# Automatic generated Node.js gitignore #############################
 # Logs
 logs
 *.log
