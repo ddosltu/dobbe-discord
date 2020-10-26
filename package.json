@@ -1,0 +1,51 @@
+{
+	"name": "dobbe-discord",
+	"version": "0.1.0",
+	"description": "A Discord bot made by and for DDOS @ Datasektionen",
+	"main": "index.js",
+	"scripts": {
+		"test": "jest",
+		"lint": "eslint .",
+		"format": "prettier --write \"**/*.+(js|ts|json|yml|yaml|css|md|vue)\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ddosltu/dobbe-discord.git"
+	},
+	"author": "DDOS",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ddosltu/dobbe-discord/issues"
+	},
+	"homepage": "https://github.com/ddosltu/dobbe-discord#readme",
+	"dependencies": {
+		"discord.js": "^12.4.1"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^4.6.0",
+		"@typescript-eslint/parser": "^4.6.0",
+		"eslint": "^7.12.0",
+		"eslint-config-prettier": "^6.14.0",
+		"eslint-plugin-prettier": "^3.1.4",
+		"husky": "^4.3.0",
+		"jest": "^26.6.1",
+		"lint-staged": "^10.5.0",
+		"prettier": "^2.1.2",
+		"typescript": "^4.0.3"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.+(js|ts)": [
+			"eslint --fix",
+			"git add"
+		],
+		"*.+(json|css|md)": [
+			"prettier --write",
+			"git add"
+		]
+	}
+}
