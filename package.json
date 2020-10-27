@@ -25,6 +25,7 @@
 	"dependencies": {
 		"discord.js": "^12.4.1",
 		"rimraf": "^3.0.2",
+		"ts-node": "^9.0.0",
 		"dotenv": "^8.2.0"
 	},
 	"devDependencies": {
@@ -40,7 +41,6 @@
 		"lint-staged": "^10.5.0",
 		"nodemon": "^2.0.6",
 		"prettier": "^2.1.2",
-		"ts-node": "^9.0.0",
 		"typescript": "^4.0.3"
 	},
 	"husky": {
