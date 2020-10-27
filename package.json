@@ -4,7 +4,8 @@
 	"description": "A Discord bot made by and for DDOS @ Datasektionen",
 	"main": "index.js",
 	"scripts": {
-		"start": "npm run build && node -r dotenv/config build/index.js",
+		"start": "npm run build && node build/index.js",
+		"start:dotenv": "npm run build && node -r dotenv/config build/index.js",
 		"dev": "nodemon",
 		"build": "rimraf ./build && tsc",
 		"test": "jest",
