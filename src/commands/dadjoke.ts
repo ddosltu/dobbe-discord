@@ -7,30 +7,32 @@ export class Command implements CommandInterface {
 	description = "Get a random DAD-joke from icanhazdadjoke!";
 	args: [number, number] = [0, 1];
 	execute(message: Discord.Message, args: string[]): void {
-		const url =
-			args.length === 0
-				? "https://icanhazdadjoke.com/"
-				: `https://icanhazdadjoke.com/search?term=${args[0]}`;
-		axios
+		this.getJoke(args).then((response) => {
+			message.reply(response);
+		});
+	}
+
+	getJoke = async (args?: string[]): Promise<string> => {
+		let url = "https://icanhazdadjoke.com/";
+		if (args && args.length !== 0)
+			url = url + `https://icanhazdadjoke.com/search?term=${args[0]}`;
+		return axios
 			.get(url, { headers: { Accept: "application/json" } })
 			.then((response) => {
 				let jokeData = response.data;
 				if (jokeData.results) {
 					const results: any[] = response.data.results;
 					if (results.length === 0) {
-						message.reply("I think you must be the one joking with that request");
-						return;
+						return "I think you must be the one joking with that request";
 					}
 					const index = Math.floor(Math.random() * Math.floor(results.length));
 					jokeData = results[index];
 				}
-				message.reply(jokeData.joke);
+				return jokeData.joke;
 			})
 			.catch((error) => {
 				console.error(error);
-				message.reply(
-					"Ha, jokes on you! Something went wrong, other than your choice of education.",
-				);
+				return "Ha, jokes on you! Something went wrong, other than your choice of education.";
 			});
-	}
+	};
 }
