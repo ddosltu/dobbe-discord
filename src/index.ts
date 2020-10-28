@@ -14,7 +14,9 @@ client.login(process.env.BOT_TOKEN);
 
 const loadCommands = async (): Promise<Discord.Collection<string, CommandInterface>> => {
 	const commands = new Discord.Collection<string, CommandInterface>();
-	const commandFiles = fs.readdirSync("./src/commands").filter((file) => file.endsWith(".ts"));
+	const commandFiles = fs
+		.readdirSync("./src/commands")
+		.filter((file) => file.match(/\.(ts|js)$/));
 	for (const file of commandFiles) {
 		const commandConstructor = await import(`./commands/${file}`);
 		const command = new commandConstructor.Command() as CommandInterface;
