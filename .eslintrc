@@ -16,6 +16,6 @@
 		"sourceType": "module"
 	},
 	"rules": {
-		"no-console": "error"
+		"no-console": [2, {	"allow": ["info", "warn", "error"] } ]
 	}
 }
