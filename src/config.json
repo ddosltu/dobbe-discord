@@ -1,3 +1,19 @@
 {
-	"prefix": "*"
+	"token": "NzM2OTUwMzM4MzQ2NjgwMzUx.Xx2QfA.1I1bjlflnQ-RBPkvsW5VRvBmVNM",
+	"prefix": "*",
+	"admin_role_ids": ["756130092236800020", "517701733871255552"],
+	"mod_role_ids": ["514905756819128340"],
+	"new_user_accept_rules": {
+		"enabled": true,
+		"rules_channel_id": "756181872958242986",
+		"rules_accepted_role_id": "756236750954823731"
+	},
+	"role_assignment": {
+		"enabled": true,
+		"listen_channel": "803995832021155881"
+	},
+	"course_rooms": {
+		"enabled": true,
+		"category_id": "756185862470893640"
+	}
 }

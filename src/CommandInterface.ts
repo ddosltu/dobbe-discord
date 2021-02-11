@@ -5,5 +5,6 @@ export default interface CommandInterface {
 	description: string;
 	usage?: string;
 	args?: [number, number]; // min, max
+	admin?: boolean;
 	execute(message: Discord.Message, args?: string[]): void;
 }
