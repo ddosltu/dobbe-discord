@@ -4,6 +4,7 @@ import path from "path";
 import CommandInterface from "./CommandInterface";
 import config from "./config.json";
 import database from "./database/db";
+import dotenv from "dotenv";
 
 const client = new Discord.Client({
 	partials: ["MESSAGE", "REACTION", "USER", "CHANNEL", "GUILD_MEMBER"],
@@ -69,7 +70,8 @@ client.on("messageReactionAdd", async (reaction, user) => {
 
 const start = async () => {
 	try {
-		client.login(process.env.BOT_TOKEN || config.token);
+		dotenv.config();
+		client.login(process.env.BOT_TOKEN);
 		await database();
 	} catch (error) {
 		console.error(error);
