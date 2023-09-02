@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 
 const DB_URL = process.env.DB_URL;
 const DB_USER = process.env.DB_USER;
@@ -10,11 +10,6 @@ const uri = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_URL}/${DB_NAME}?retryWrite
 
 export default async () => {
 	dotenv.config();
-	const connection = await mongoose.connect(uri, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useFindAndModify: false,
-		useCreateIndex: true,
-	});
+	const connection = await mongoose.connect(uri);
 	return connection;
 };

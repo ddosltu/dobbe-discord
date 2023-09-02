@@ -1,14 +1,23 @@
-import Discord from "discord.js";
+import Discord, { ClientOptions, GatewayIntentBits, Partials } from "discord.js";
+import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
 import CommandInterface from "./CommandInterface";
 import config from "./config.json";
 import database from "./database/db";
-import dotenv from "dotenv";
 
-const client = new Discord.Client({
-	partials: ["MESSAGE", "REACTION", "USER", "CHANNEL", "GUILD_MEMBER"],
-});
+const clientOptions: ClientOptions = {
+	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
+	partials: [
+		Partials.Message,
+		Partials.Reaction,
+		Partials.User,
+		Partials.Channel,
+		Partials.GuildMember,
+	],
+};
+
+const client = new Discord.Client(clientOptions);
 const prefix = process.env.PREFIX || config.prefix;
 
 client.on("ready", () => {
@@ -72,7 +81,7 @@ const start = async () => {
 	try {
 		dotenv.config();
 		client.login(process.env.BOT_TOKEN);
-		await database();
+		//await database();
 	} catch (error) {
 		console.error(error);
 	}
