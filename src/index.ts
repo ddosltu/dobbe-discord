@@ -81,7 +81,7 @@ const start = async () => {
 	try {
 		dotenv.config();
 		client.login(process.env.BOT_TOKEN);
-		//await database();
+		await database();
 	} catch (error) {
 		console.error(error);
 	}
