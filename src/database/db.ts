@@ -9,11 +9,6 @@ const DB_NAME = "dobbe-discord";
 const uri = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_URL}/${DB_NAME}?retryWrites=true&w=majority`;
 
 export default async () => {
-	const connection = await mongoose.connect(uri, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useFindAndModify: false,
-		useCreateIndex: true,
-	});
+	const connection = await mongoose.connect(uri);
 	return connection;
 };

@@ -1,4 +1,4 @@
-import Discord from "discord.js";
+import Discord, { ChannelType } from "discord.js";
 import CommandInterface from "../CommandInterface";
 import config from "../config.json";
 import Role from "../database/roleService";
@@ -50,7 +50,7 @@ const addCourseRoom = async (message: Discord.Message, args: string[], configs: 
 	// Find or create role
 	let role = message.guild?.roles.cache.find((role: any) => role.name === discordRole);
 	if (!role) {
-		role = await message.guild?.roles.create({ data: { name: discordRole, color: "BLUE" } });
+		role = await message.guild?.roles.create({ name: discordRole, color: "Blue" });
 	}
 
 	// Find or create channel
@@ -58,9 +58,10 @@ const addCourseRoom = async (message: Discord.Message, args: string[], configs: 
 		(channel: any) => channel.name === channelName,
 	);
 	if (!channel) {
-		const permissions = new Discord.Permissions(["VIEW_CHANNEL"]);
-		channel = await message.guild?.channels.create(channelName, {
-			type: "text",
+		const permissions = [Discord.PermissionFlagsBits.ViewChannel];
+		channel = await message.guild?.channels.create({
+			name: channelName,
+			type: ChannelType.GuildText,
 			parent: categoryId,
 			permissionOverwrites: [
 				{
