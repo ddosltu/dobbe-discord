@@ -42,5 +42,5 @@ const toggleRole = async (message: any, roleCommand: string) => {
 
 const listRoles = async (message: any) => {
 	const roles = await RoleService.getAllRoles();
-	message.channel.send(roles);
+	message.channel.send(roles.toString());
 };

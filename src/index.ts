@@ -1,5 +1,4 @@
 import Discord, { ClientOptions, GatewayIntentBits, Partials } from "discord.js";
-import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
 import CommandInterface from "./CommandInterface";
@@ -8,7 +7,11 @@ import database from "./database/db";
 import "dotenv/config";
 
 const clientOptions: ClientOptions = {
-	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent
+	],
 	partials: [
 		Partials.Message,
 		Partials.Reaction,
@@ -37,15 +40,17 @@ const loadCommands = async (): Promise<Discord.Collection<string, CommandInterfa
 	return commands;
 };
 loadCommands().then((commands) => {
-	client.on("message", (message) => {
+	client.on("messageCreate", (message) => {
 		if (!message.content.startsWith(prefix) || message.author.bot) return;
 		const args = message.content.slice(prefix.length).trim().split(/ +/);
 		const commandName = args.shift()?.toLowerCase();
 		if (!commandName) return;
 		if (!commands.has(commandName)) return;
 		const command = commands.get(commandName) as CommandInterface;
-		if (command.args && (args.length < command.args[0] || args.length > command.args[1]))
-			return message.reply(`You didn't provide correct amount of arguments!`);
+		if (command.args && (args.length < command.args[0] || args.length > command.args[1])) {
+			message.reply(`You didn't provide correct amount of arguments!`);
+			return;
+		}
 		try {
 			command.execute(message, args);
 		} catch (error) {
