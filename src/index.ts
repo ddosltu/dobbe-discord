@@ -10,6 +10,7 @@ const clientOptions: ClientOptions = {
 	intents: [
 		GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.GuildMessageReactions,
 		GatewayIntentBits.MessageContent
 	],
 	partials: [
