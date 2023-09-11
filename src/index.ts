@@ -5,6 +5,7 @@ import path from "path";
 import CommandInterface from "./CommandInterface";
 import config from "./config.json";
 import database from "./database/db";
+import "dotenv/config";
 
 const clientOptions: ClientOptions = {
 	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
@@ -79,7 +80,6 @@ client.on("messageReactionAdd", async (reaction, user) => {
 
 const start = async () => {
 	try {
-		dotenv.config();
 		client.login(process.env.BOT_TOKEN);
 		await database();
 	} catch (error) {
