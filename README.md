@@ -25,8 +25,23 @@ $ npm install
 $ npm run dev
 ```
 
-To add an user to the mongodb:
 
+
+### Docker Compose
+
+This project uses docker-compose for easier deployment of the database. Instructions can be found [here](https://docs.docker.com/compose/gettingstarted/).
+
+To start:
+```console
+$ docker-compose up -d
+```
+
+To stop:
+```console
+$ docker-compose down
+```
+
+Please note that the first time you run the project you need to create an database user within the mongodb container. To do so:
 ```console
 $ docker ps # Find container id of mongodb
 $ docker exec -it <ID> bash # Run bash inside container
@@ -34,7 +49,6 @@ $ mongosh -u root -p root # Log into mongo with root
 test> use dobbe-discord
 dobbe-discord> db.createUser({user:"user", pwd:"pass", roles:[{role:"readWrite", db:"dobbe-discord"}]})
 ```
-
 Dont forget to add the mongodb user credentials to the .env file
 
 ### Tests
