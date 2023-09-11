@@ -25,6 +25,18 @@ $ npm install
 $ npm run dev
 ```
 
+To add an user to the mongodb:
+
+```console
+$ docker ps # Find container id of mongodb
+$ docker exec -it <ID> bash # Run bash inside container
+$ mongosh -u root -p root # Log into mongo with root
+test> use dobbe-discord
+dobbe-discord> db.createUser({user:"user", pwd:"pass", roles:[{role:"readWrite", db:"dobbe-discord"}]})
+```
+
+Dont forget to add the mongodb user credentials to the .env file
+
 ### Tests
 
 The project uses [Jest](https://jestjs.io/) for testing. Run with command:
